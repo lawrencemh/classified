@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 use App\Category;
 use App\Area;
-use app\Traits\Eloquent\OrderableTrait;
+use App\Traits\Eloquent\OrderableTrait;
 
 class Listing extends Model
 {
@@ -66,7 +66,7 @@ class Listing extends Model
      *
      * @return boolean
      */
-    public function isLive()
+    public function live()
     {
         return (boolean) $this->is_live;
     }
@@ -122,7 +122,7 @@ class Listing extends Model
 
         // merge the area_id with its children ids and query all listings with these area_ids
         return $query->whereIn('area_id', array_merge(
-            [$area_id],
+            [$area->id],
             $area_children
         ));
     }

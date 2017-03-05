@@ -10,7 +10,7 @@
                     <hr>
 
                     @foreach($category->children as $subCategory)
-                        <h5><a href="">{{ $subCategory->name }}</a> (0)</h5>
+                        <h5><a href="{{ route('category.listings.index', [$area, $subCategory]) }}">{{ $subCategory->name }}</a> (0)</h5>
                     @endforeach
 
                 </div>

@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         // get list of categories
         // @todo eager load in listings
-        $categories = Category::get()->toTree();
+        $categories = Category::withListingsInArea($area)->get()->toTree();
 
         return view('categories.index')
             ->with('categories', $categories);

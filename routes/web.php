@@ -35,7 +35,6 @@ Route::group(['prefix' => '/{area}'], function() {
     /**
      * Listing.
      */
-    Route::group(['prefix' => '/listings'], function() {
-        //
-    });
+    Route::get('/{listing}', 'Listing\ListingController@show')
+        ->name('listing.show');
 });

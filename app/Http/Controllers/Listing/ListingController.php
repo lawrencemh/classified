@@ -31,4 +31,19 @@ class ListingController extends Controller
             ->with('listings', $listings)
             ->with('category', $category);
     }
+
+    /**
+     *
+     */
+    public function show(Request $request, Area $area, Listing $listing)
+    {
+        // check listing is live
+        if ($listing->live() == false) {
+            return abort(404);
+        }
+
+        // return view
+        return view('listings.show')
+            ->with('listing', $listing);
+    }
 }

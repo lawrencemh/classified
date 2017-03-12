@@ -128,6 +128,8 @@ class Listing extends Model
     }
 
     /**
+     * Returns the Listing's users that have added this post to their favourites.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function favourites()
@@ -135,6 +137,12 @@ class Listing extends Model
         return $this->morphToMany(Listing::class, 'favouriteable');
     }
 
+    /**
+     * Returns true if user has added this listing to their favourites.
+     *
+     * @param \App\User $user
+     * @return boolean
+     */
     public function favouritedBy(User $user)
     {
         return $this->favourites->contains($user);

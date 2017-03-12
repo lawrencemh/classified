@@ -28,7 +28,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return mixed
+     * Return the user's favourite listings.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphByMany
      */
     public function favouriteListings()
     {

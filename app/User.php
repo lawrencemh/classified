@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return mixed
+     */
+    public function favouriteListings()
+    {
+        return $this->morphedByMany(Listing::class, 'favouriteable')
+            ->withPivot('created_at')
+            ->orderByPivot('created_at', 'desc');
+    }
 }

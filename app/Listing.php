@@ -127,5 +127,18 @@ class Listing extends Model
         ));
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function favourites()
+    {
+        return $this->morphToMany(Listing::class, 'favouriteable');
+    }
+
+    public function favouritedBy(User $user)
+    {
+        return $this->favourites->contains($user);
+    }
+
 
 }

@@ -134,7 +134,7 @@ class Listing extends Model
      */
     public function favourites()
     {
-        return $this->morphToMany(Listing::class, 'favouriteable');
+        return $this->morphToMany(User::class, 'favouriteable');
     }
 
     /**

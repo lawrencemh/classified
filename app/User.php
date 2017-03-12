@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Listing;
 
 class User extends Authenticatable
 {
@@ -30,12 +31,11 @@ class User extends Authenticatable
     /**
      * Return the user's favourite listings.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphByMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphedByMany
      */
     public function favouriteListings()
     {
         return $this->morphedByMany(Listing::class, 'favouriteable')
-            ->withPivot('created_at')
-            ->orderByPivot('created_at', 'desc');
+            ->withPivot('created_at');
     }
 }

@@ -23,6 +23,8 @@ class ListingController extends Controller
         $listings = Listing::with(['user', 'area'])
             ->isLive()
             ->inArea($area)
+            ->withArea()
+            ->withUser()
             ->fromCategory($category)
             ->latestFirst()
             ->paginate(10);
@@ -33,7 +35,12 @@ class ListingController extends Controller
     }
 
     /**
+     * Show listing in area.
      *
+     * @param Request $request
+     * @param Area $area
+     * @param Listing $listing
+     * @return $this|void
      */
     public function show(Request $request, Area $area, Listing $listing)
     {

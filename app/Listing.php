@@ -8,6 +8,7 @@ use App\User;
 use App\Category;
 use App\Area;
 use App\Traits\Eloquent\OrderableTrait;
+use App\Traits\Eloquent\PivotOrderableTrait;
 
 class Listing extends Model
 {
@@ -20,6 +21,11 @@ class Listing extends Model
      * Enable ordering
      */
     use OrderableTrait;
+
+    /**
+     * Enable pivot ordering
+     */
+    use PivotOrderableTrait;
 
     /**
      * Return the user the listing belongs to.
@@ -125,6 +131,28 @@ class Listing extends Model
             [$area->id],
             $area_children
         ));
+    }
+
+    /**
+     * Eager load area.
+     *
+     * @param $query
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public function scopeWithArea($query)
+    {
+        return $query->with(['area']);
+    }
+
+    /**
+     * Eager load user.
+     *
+     * @param $query
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public function scopeWithUser($query)
+    {
+        return $query->with(['user']);
     }
 
     /**

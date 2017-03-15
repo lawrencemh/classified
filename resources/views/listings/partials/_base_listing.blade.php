@@ -13,7 +13,6 @@
             </li>
             <li>{{ $listing->user->name }}</li>
         </ul>
+        {{ $listing_links or ''}}
     </div>
 </div>
-
-@yield('links')

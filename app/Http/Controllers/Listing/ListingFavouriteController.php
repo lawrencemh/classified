@@ -28,8 +28,7 @@ class ListingFavouriteController extends Controller
     public function index(Request $request)
     {
         // get all the user's favourite listings
-        $listings = $request
-            ->user()
+        $listings = $request->user()
             ->favouriteListings()
             ->withUser()
             ->withArea()
@@ -55,7 +54,8 @@ class ListingFavouriteController extends Controller
             ->favouriteListings()
             ->syncWithoutDetaching([$listing->id]);
 
-        return back();
+        return back()
+            ->withSuccess('Listing added to favourites.');
     }
 
     /**
@@ -69,12 +69,12 @@ class ListingFavouriteController extends Controller
     public function destroy(Request $request, Area $area, Listing $listing)
     {
         // detach association
-        $request
-            ->user()
+        $request->user()
             ->favouriteListings()
             ->detach($listing);
 
         // redirect
-        return back();
+        return back()
+            ->withSuccess('Listing removed from favourites.');
     }
 }

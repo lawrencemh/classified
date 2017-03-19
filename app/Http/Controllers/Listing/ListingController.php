@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\Area;
+use App\Jobs\UserViewedListing;
 
 class ListingController extends Controller
 {
@@ -47,6 +48,11 @@ class ListingController extends Controller
         // check listing is live
         if ($listing->live() == false) {
             return abort(404);
+        }
+
+        // dispatch userViewedListing job
+        if ($request->user()) {
+            dispatch(new UserViewedListing($request->user(), $listing));
         }
 
         // return view

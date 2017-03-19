@@ -188,5 +188,15 @@ class Listing extends Model
             ->withPivot(['count']);
     }
 
+    /**
+     * Returns the total user views for this listing.
+     *
+     * @return int
+     */
+    public function getViewedCount()
+    {
+        return $this->viewedUsers()->sum('count');
+    }
+
 
 }

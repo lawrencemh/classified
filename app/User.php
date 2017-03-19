@@ -38,4 +38,15 @@ class User extends Authenticatable
         return $this->morphedByMany(Listing::class, 'favouriteable')
             ->withPivot('created_at');
     }
+
+    /**
+     * Return the user's previously viewed listings.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function viewedListings()
+    {
+        return $this->belongsToMany(Listing::class, 'user_listing_views')
+            ->withTimestamps();
+    }
 }

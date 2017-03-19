@@ -176,5 +176,17 @@ class Listing extends Model
         return $this->favourites->contains($user);
     }
 
+    /**
+     * Return the users that have viewed this listing.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function viewedUsers()
+    {
+        return $this->belongsToMany(User::class, 'user_listing_views')
+            ->withTimestamps()
+            ->withPivot(['count']);
+    }
+
 
 }

@@ -48,8 +48,10 @@ Route::group(['prefix' => '/{area}'], function() {
             ->name('listing.favourites.destroy');
         Route::get('/viewed', 'ListingViewedController@index')
             ->name('listings.viewed.index');
+        Route::post('{listing}/contact', 'ListingContactController@store')
+            ->name('listings.contact.store');
     });
 
     Route::get('/{listing}', 'Listing\ListingController@show')
-        ->name('listing.show');
+        ->name('listings.show');
 });

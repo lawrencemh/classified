@@ -53,12 +53,18 @@
                             Contact {{ $listing->user->name }}
                         </div>
                         <div class="panel-body">
-                            <form action="" method="post">
+                            <form action="{{ route('listings.contact.store', [$area, $listing]) }}" method="post">
                                 {{ csrf_field() }}
-                                <div class="form-group">
-                                    <label for="message">Message</label>
+                                <div class="form-group {{ $errors->has('message') ? ' has-error' : '' }}">
+                                    <label for="message" class="control-label">Message</label>
                                     <textarea class="form-control" name="message" id="message" cols="30" rows="5">
                                     </textarea>
+
+                                    @if ($errors->has('message'))
+                                        <span class="help-block">
+                                            {{ $errors->first('message') }}
+                                        </span>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">

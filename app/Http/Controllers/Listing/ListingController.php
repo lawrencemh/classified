@@ -59,4 +59,35 @@ class ListingController extends Controller
         return view('listings.show')
             ->with('listing', $listing);
     }
+
+    /**
+     * Show the form to create a new listing.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('listings.create');
+    }
+
+
+    /**
+     * Store the submitted listing.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return void
+     */
+    public function store(Request $request)
+    {
+        $listing = new Listing;
+        $listing->title = $request->get('title');
+        $listing->body = $request->get('body');
+        $listing->category_id = $request->get('category_id');
+        $listing->area_id = $request->get('area_id');
+        $listing->user()->associate($request->user());
+
+        $listing->save();
+
+        // @todo redirect to listing edit page
+    }
 }

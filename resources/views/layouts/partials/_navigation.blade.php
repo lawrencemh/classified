@@ -32,6 +32,21 @@
                 @else
                     <li><a href="{{ route('listings.viewed.index', [$area]) }}">Recently Viewed</a></li>
                     <li><a href="{{ route('listings.favourites.index', [$area]) }}">Favourites</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Listings <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{ route('listings.create', [$area]) }}">
+                                    New Listing
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>

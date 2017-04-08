@@ -50,6 +50,13 @@ Route::group(['prefix' => '/{area}'], function() {
             ->name('listings.viewed.index');
         Route::post('{listing}/contact', 'ListingContactController@store')
             ->name('listings.contact.store');
+
+        Route::group(['middleware' => 'auth'], function() {
+            Route::get('/create', 'ListingController@create')
+                ->name('listings.create');
+            Route::post('/create', 'ListingController@store')
+                ->name('listings.store');
+        });
     });
 
     Route::get('/{listing}', 'Listing\ListingController@show')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Listing;
 
+use App\Http\Requests\StoreListingFormRequest;
 use App\Listing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -77,7 +78,7 @@ class ListingController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(StoreListingFormRequest $request)
     {
         $listing = new Listing;
         $listing->title = $request->get('title');

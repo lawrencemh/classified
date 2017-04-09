@@ -56,6 +56,10 @@ Route::group(['prefix' => '/{area}'], function() {
                 ->name('listings.create');
             Route::post('/create', 'ListingController@store')
                 ->name('listings.store');
+            Route::get('/{listing}/edit', 'ListingController@edit')
+                ->name('listings.edit');
+            Route::patch('/{listing}/edit', 'ListingController@update')
+                ->name('listings.update');
         });
     });
 

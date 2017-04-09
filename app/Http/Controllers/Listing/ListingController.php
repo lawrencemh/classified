@@ -75,10 +75,10 @@ class ListingController extends Controller
     /**
      * Store the submitted listing.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\StoreListingFormRequest $request
      * @return void
      */
-    public function store(StoreListingFormRequest $request)
+    public function store(StoreListingFormRequest $request, Area $area)
     {
         $listing = new Listing;
         $listing->title = $request->get('title');
@@ -89,6 +89,33 @@ class ListingController extends Controller
 
         $listing->save();
 
-        // @todo redirect to listing edit page
+        return redirect()->route('listings.edit', [$area, $listing]);
+    }
+
+    public function edit(Request $request, Area $area, Listing $listing)
+    {
+        $this->authorize('edit', [$listing]);
+
+        return view('listings.edit')->with('listing', $listing);
+    }
+
+    public function update(StoreListingFormRequest $request, Area $area, Listing $listing)
+    {
+        $this->authorize('update', [$listing]);
+
+        $listing->title = $request->get('title');
+        $listing->body = $request->get('body');
+
+        if (!$listing->live()) {
+            $listing->category_id = $request->get('category_id');
+        }
+
+        $listing->area_id = $request->get('area_id');
+
+        $listing->save();
+
+        // @todo check if payment button was clicked
+
+        return back()->withSuccess('Listing successfully updated.');
     }
 }

@@ -78,6 +78,17 @@ class Listing extends Model
     }
 
     /**
+     * Determines if a listing is owned by a user.
+     *
+     * @param \App\User $user
+     * @return bool
+     */
+    public function ownedByUser(User $user)
+    {
+        return $this->user->id === $user->id;
+    }
+
+    /**
      * Query all non-live listings.
      *
      * @param $query

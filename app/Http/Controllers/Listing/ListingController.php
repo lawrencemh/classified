@@ -15,9 +15,9 @@ class ListingController extends Controller
     /**
      * Return the listings for the area's category.
      *
-     * @param Area $area
-     * @param Category $category
-     * @return
+     * @param \App\Area $area
+     * @param \App\Category $category
+     * @return \Illuminate\View\View
      */
     public function index(Area $area, Category $category)
     {
@@ -39,10 +39,10 @@ class ListingController extends Controller
     /**
      * Show listing in area.
      *
-     * @param Request $request
-     * @param Area $area
-     * @param Listing $listing
-     * @return $this|void
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Area $area
+     * @param \App\Listing $listing
+     * @return \Illuminate\View\View
      */
     public function show(Request $request, Area $area, Listing $listing)
     {
@@ -64,7 +64,7 @@ class ListingController extends Controller
     /**
      * Show the form to create a new listing.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -76,7 +76,8 @@ class ListingController extends Controller
      * Store the submitted listing.
      *
      * @param \App\Http\Requests\StoreListingFormRequest $request
-     * @return void
+     * @param \App\Area $area
+     * @return \Illuminate\Routing\Redirector
      */
     public function store(StoreListingFormRequest $request, Area $area)
     {
@@ -92,6 +93,14 @@ class ListingController extends Controller
         return redirect()->route('listings.edit', [$area, $listing]);
     }
 
+    /**
+     * Edit an existing listing.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Area $area
+     * @param \App\Listing $listing
+     * @return \Illuminate\View\View
+     */
     public function edit(Request $request, Area $area, Listing $listing)
     {
         $this->authorize('edit', [$listing]);
@@ -99,6 +108,12 @@ class ListingController extends Controller
         return view('listings.edit')->with('listing', $listing);
     }
 
+    /**
+     * @param \App\Http\Requests\StoreListingFormRequest $request
+     * @param \App\Area $area
+     * @param \App\Listing $listing
+     * @return \Illuminate\Routing\Redirector
+     */
     public function update(StoreListingFormRequest $request, Area $area, Listing $listing)
     {
         $this->authorize('update', [$listing]);

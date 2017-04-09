@@ -11,20 +11,10 @@ class ListingPolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Validates whether a user has permission to edit a listing.
      *
-     * @param User $user
-     * @param Listing $listing
+     * @param \App\User $user
+     * @param \App\Listing $listing
      * @return bool
      */
     public function edit(User $user, Listing $listing)
@@ -35,8 +25,8 @@ class ListingPolicy
     /**
      * Validates whether a user has permission to update a listing.
      *
-     * @param User $user
-     * @param Listing $listing
+     * @param \App\User $user
+     * @param \App\Listing $listing
      * @return bool
      */
     public function update(User $user, Listing $listing)
@@ -47,8 +37,8 @@ class ListingPolicy
     /**
      * Validates whether a user has permission to destroy a listing.
      *
-     * @param User $user
-     * @param Listing $listing
+     * @param \App\User $user
+     * @param \App\Listing $listing
      * @return bool
      */
     public function destroy(User $user, Listing $listing)

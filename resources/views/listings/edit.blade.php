@@ -18,7 +18,8 @@
                         @include('listings.partials.forms._areas')
 
                         @include('listings.partials.forms._categories')
-
+                        <input type="hidden" name="category_id" value="{{ $listing->category->id }}"/>
+                        
                         <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                             <label for="title" class="control-label">Title</label>
                             <input type="text" name="title" id="title" class="form-control" value="{{ $listing->title }}">
@@ -30,7 +31,7 @@
                             @endif
 
                         </div>
-
+                        
                         <div class="form-group {{ $errors->has('body') ? ' has-error' : '' }}">
                             <label for="body" class="control-label">Body</label>
                             <textarea type="text" name="body" id="body" class="form-control">{{ $listing->body }}

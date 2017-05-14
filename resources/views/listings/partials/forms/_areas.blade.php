@@ -1,6 +1,6 @@
 <div class="form-group {{ $errors->has('area_id') ? ' has-error' : '' }}">
     <label for="area" class="control-label">Area</label>
-    <select name="area_id" id="area" class="form-control" {{ isset($listing) && $listing->live() ? 'disabled="disabled"' : ''  }}>
+    <select name="area_id" id="area" class="form-control">
 
         @foreach ($areas as $country)
             <optgroup label="{{ $country->name }}">

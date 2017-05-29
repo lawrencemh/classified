@@ -129,7 +129,10 @@ class ListingController extends Controller
 
         $listing->save();
 
-        // @todo check if payment button was clicked
+        // check if proceed to payment has been clicked
+        if ($request->has('payment')) {
+            return redirect()->route('listings.payment.show', [$area, $listing]);
+        }
 
         return back()->withSuccess('Listing successfully updated.');
     }

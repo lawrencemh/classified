@@ -19,7 +19,7 @@ class ListingPolicy
      */
     public function edit(User $user, Listing $listing)
     {
-        return $listing->ownedByUser($user);
+        return $this->touch($user, $listing);
     }
 
     /**
@@ -31,7 +31,7 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing)
     {
-        return $listing->ownedByUser($user);
+        return $this->touch($user, $listing);
     }
 
     /**
@@ -42,6 +42,18 @@ class ListingPolicy
      * @return bool
      */
     public function destroy(User $user, Listing $listing)
+    {
+        return $this->touch($user, $listing);
+    }
+    
+    /**
+     * Validates whether a user has permission to touch a listing.
+     *
+     * @param \App\User $user
+     * @param \App\Listing $listing
+     * @return bool
+     */
+    public function touch(User $user, Listing $listing)
     {
         return $listing->ownedByUser($user);
     }

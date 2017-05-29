@@ -45,8 +45,14 @@
 
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group clearfix">
                             <button class="btn btn-default">Save</button>
+                            
+                            @if (!$listing->live())
+                            <button class="btn btn-primary pull-right" type="submit" name="payment" value="true">
+                                Continue to Payment
+                            </button>
+                            @endif
                         </div>
                     </form>
                 </div>
